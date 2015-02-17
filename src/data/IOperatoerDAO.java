@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 public interface IOperatoerDAO {
 
 	OperatoerDTO getOperatoer(int oprId) throws DALException;
@@ -13,6 +15,7 @@ public interface IOperatoerDAO {
 		private String er;
 		
 		public String toString(){
+			er = "fejl";
 			return er;
 		}
 		

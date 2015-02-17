@@ -25,13 +25,13 @@ public class BGController {
 
 		case 0: exit();
 
-		case 1: opAdmin();					
+		case 1:  opAdmin();					
 		break;
 
-		case 2: passControle();
+		case 2:  passControle();
 		break;
 
-		case 3: test();
+		case 3:  test();
 		break;
 		}
 

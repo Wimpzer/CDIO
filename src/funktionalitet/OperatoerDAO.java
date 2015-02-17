@@ -1,8 +1,16 @@
-package data;
+package funktionalitet;
 
 import java.util.List;
 
+import data.IOperatoerDTO;
+import data.OperatoerDTO;
+
 public class OperatoerDAO implements IOperatoerDAO {
+	IOperatoerDTO dto;
+	
+	public OperatoerDAO(IOperatoerDTO dto) {
+		this.dto = dto;
+	}
 
 	@Override
 	public IOperatoerDTO getOperatoer(int oprId) throws DALException {

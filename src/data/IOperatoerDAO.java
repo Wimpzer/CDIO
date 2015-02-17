@@ -7,4 +7,15 @@ public interface IOperatoerDAO {
 	void createOperatoer(OperatoerDTO opr) throws DALException;
 	void updateOperatoer(OperatoerDTO opr) throws DALException;
 	
+	
+	public class DALException extends Exception{
+		
+		private String er;
+		
+		public String toString(){
+			return er;
+		}
+		
+	}
+	
 }

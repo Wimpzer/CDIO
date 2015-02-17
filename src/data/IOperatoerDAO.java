@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface IOperatoerDAO {
 
-	OperatoerDTO getOperatoer(int oprId) throws DALException;
+	IOperatoerDTO getOperatoer(int oprId) throws DALException;
 	List<OperatoerDTO> getOperatoerList() throws DALException;
-	void createOperatoer(OperatoerDTO opr) throws DALException;
-	void updateOperatoer(OperatoerDTO opr) throws DALException;
+	void createOperatoer(IOperatoerDTO opr) throws DALException;
+	void updateOperatoer(IOperatoerDTO opr) throws DALException;
 	
 	
 	public class DALException extends Exception{

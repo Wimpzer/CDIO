@@ -5,7 +5,7 @@ import java.util.List;
 public class OperatoerDAO implements IOperatoerDAO {
 
 	@Override
-	public OperatoerDTO getOperatoer(int oprId) throws DALException {
+	public IOperatoerDTO getOperatoer(int oprId) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -17,13 +17,13 @@ public class OperatoerDAO implements IOperatoerDAO {
 	}
 
 	@Override
-	public void createOperatoer(OperatoerDTO opr) throws DALException {
+	public void createOperatoer(IOperatoerDTO opr) throws DALException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateOperatoer(OperatoerDTO opr) throws DALException {
+	public void updateOperatoer(IOperatoerDTO opr) throws DALException {
 		// TODO Auto-generated method stub
 		
 	}

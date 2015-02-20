@@ -8,7 +8,7 @@ import data.OperatoerDTO;
 public interface IOperatoerDAO {
 
 	IOperatoerDTO getOperatoer(int oprId) throws DALException;
-	List<OperatoerDTO> getOperatoerList() throws DALException;
+	List<IOperatoerDTO> getOperatoerList() throws DALException;
 	void createOperatoer(IOperatoerDTO opr) throws DALException;
 	void updateOperatoer(IOperatoerDTO opr) throws DALException;
 	

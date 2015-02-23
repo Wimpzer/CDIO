@@ -8,6 +8,13 @@ public class OperatoerDTO implements IOperatoerDTO {
 	String cpr;                 
 	String password;
 
+	
+	public OperatoerDTO(int oprID, String oprNavn, String cpr, String password){
+		this.oprId = oprID;
+		this.oprNavn = oprNavn;
+		this.cpr = cpr;
+		this.password = password;
+	}
 
 	/* (non-Javadoc)
 	 * @see data.IOperatoerDTO#getOprId()

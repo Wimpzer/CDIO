@@ -6,7 +6,7 @@ import java.util.Random;
 public class CreateOperatoer implements ICreateOperatoer {
 
 	@Override
-	public boolean checkPassword() {
+	public boolean checkPassword(int oprID, String password) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -36,19 +36,19 @@ public class CreateOperatoer implements ICreateOperatoer {
 	}
 
 	@Override
-	public void deleteOperatoer() {
+	public void deleteOperatoer(int oprID) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void editOperatoer() {
+	public void editOperatoer(int oprID) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setNewPassword() {
+	public void setNewPassword(int oprID, String password) {
 		// TODO Auto-generated method stub
 		
 	}

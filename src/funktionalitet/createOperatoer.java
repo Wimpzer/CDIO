@@ -3,9 +3,21 @@ package funktionalitet;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class createOperatoer {
+public class CreateOperatoer implements ICreateOperatoer {
 
-	public static String generatePassword(){
+	@Override
+	public boolean checkPassword() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void createOperatoer() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public String generatePassword(){
 
 		final Random RANDOM = new SecureRandom();
 
@@ -21,6 +33,30 @@ public class createOperatoer {
 		}
 
 		return pw;
+	}
+
+	@Override
+	public void deleteOperatoer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void editOperatoer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setNewPassword() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tellNetto() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

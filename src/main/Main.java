@@ -8,8 +8,12 @@ import grænseflade.Brugergrænseflade;
 public class Main {
 
 	public static void main(String[] args) {
-		IOperatoerDTO dto = new OperatoerDTO();
-		IOperatoerDAO dao = new OperatoerDAO(dto);
+		IOperatoerDAO dao = new OperatoerDAO();
+		ICreateOperatoer co = new CreateOperatoer(dao);
+		IBrugergrænseflade bgf = new Brugergrænseflade(co);
+		bgf.run(co, bgf);
+		
+		
 		BGController bgf = new BGController();
 		bgf.run();		
 

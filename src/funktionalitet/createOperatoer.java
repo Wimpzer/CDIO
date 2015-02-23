@@ -3,8 +3,15 @@ package funktionalitet;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class CreateOperatoer implements ICreateOperatoer {
+import data.IOperatoerDAO;
 
+public class CreateOperatoer implements ICreateOperatoer {
+	IOperatoerDAO dao;
+	
+	public CreateOperatoer(IOperatoerDAO dao) {
+		this.dao = dao;
+	}
+	
 	@Override
 	public boolean checkPassword(int oprID, String password) {
 		// TODO Auto-generated method stub

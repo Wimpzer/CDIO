@@ -1,9 +1,6 @@
-package funktionalitet;
+package data;
 
 import java.util.List;
-
-import data.IOperatoerDTO;
-import data.OperatoerDTO;
 
 public interface IOperatoerDAO {
 

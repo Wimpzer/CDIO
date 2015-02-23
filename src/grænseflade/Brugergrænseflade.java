@@ -1,7 +1,7 @@
 package grænseflade;
 import java.util.Scanner;
 
-import funktionalitet.IOperatoerDAO;
+import data.IOperatoerDAO;
 
 public class Brugergrænseflade {
 	IOperatoerDAO dao;

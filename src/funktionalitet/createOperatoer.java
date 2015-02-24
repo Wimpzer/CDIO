@@ -12,6 +12,7 @@ public class CreateOperatoer implements ICreateOperatoer {
 		this.dao = dao;
 	}
 	
+	
 	@Override
 	public boolean checkPassword(int oprID, String password) {
 		// TODO Auto-generated method stub

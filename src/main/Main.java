@@ -11,13 +11,9 @@ public class Main {
 		IOperatoerDAO dao = new OperatoerDAO();
 		ICreateOperatoer co = new CreateOperatoer(dao);
 		IBrugergrænseflade bgf = new Brugergrænseflade(co);
-		bgf.run(co, bgf);
-		
-		
-		BGController bgf = new BGController();
-		bgf.run();		
-
-
+		BGController bgc = new BGController();
+		bgc.setRefs(co, bgf);
+		bgc.run();
 	}
 
 }

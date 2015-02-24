@@ -1,13 +1,13 @@
 package grænseflade;
 import java.util.Scanner;
 
-import data.IOperatoerDAO;
+import funktionalitet.ICreateOperatoer;
 
 public class Brugergrænseflade {
-	IOperatoerDAO dao;
+	ICreateOperatoer co;
 
-	public Brugergrænseflade() {
-		this.dao = dao;
+	public Brugergrænseflade(ICreateOperatoer co) {
+		this.co = co;
 	}
 
 	Scanner scan = new Scanner(System.in);

@@ -14,6 +14,7 @@ public class Main {
 		BGController bgc = new BGController();
 		bgc.setRefs(co, bgf);
 		bgc.run();
+		
 	}
 
 }

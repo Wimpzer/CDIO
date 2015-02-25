@@ -4,6 +4,7 @@ import data.*;
 import funktionalitet.*;
 import grænseflade.BGController;
 import grænseflade.Brugergrænseflade;
+import grænseflade.IBrugergrænseflade;
 
 public class Main {
 

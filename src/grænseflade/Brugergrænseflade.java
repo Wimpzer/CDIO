@@ -1,31 +1,44 @@
 package grænseflade;
-import java.util.Scanner;
 
 import funktionalitet.ICreateOperatoer;
 
-public class Brugergrænseflade {
+public class Brugergrænseflade implements IBrugergrænseflade {
 	ICreateOperatoer co;
 
 	public Brugergrænseflade(ICreateOperatoer co) {
 		this.co = co;
 	}
 
-	Scanner scan = new Scanner(System.in);
-
-	public int InputMenu() {
+	
+	@Override
+	public void InputMenu() {
 		System.out.println("\tStart Menu\n");
-		System.out.println("Press 1 to: OpAdmin");
+		System.out.println("Press 1 to: SystemAdmin");
 		System.out.println("Press 2 to: PassControle");
 		System.out.println("Press 3 to: Test");
 		System.out.println("Press 0 to: Exit");
 
-		int input = scan.nextInt();
+		
+	}
 
-		return input;
+	public void test() {
+		System.out.println("Test");
 
 	}
 
+	public void passControle() {
+		System.out.println("PassControle");
 
+	}
 
+	public void systemAdmin() {
+		System.out.println("SystemAdmin");
+
+	}
+
+	public void exit() {
+		System.out.println("Exit");
+
+	}
 
 }

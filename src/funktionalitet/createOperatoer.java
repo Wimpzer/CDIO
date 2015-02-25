@@ -2,10 +2,12 @@ package funktionalitet;
 
 import java.security.SecureRandom;
 import java.util.Random;
-import java.lang.*;
+
+import javax.swing.JOptionPane;
 
 import data.IOperatoerDAO;
 import data.IOperatoerDAO.DALException;
+import data.IOperatoerDTO;
 
 public class CreateOperatoer implements ICreateOperatoer {
 	IOperatoerDAO dao;
@@ -36,11 +38,18 @@ public class CreateOperatoer implements ICreateOperatoer {
 	}
 
 	@Override
-	public void createOperatoer() {
-		// TODO Auto-generated method stub
-
+	public void createOperatoer() { //TODO: Throw exception?
+        String oprNavn = JOptionPane.showInputDialog("Skriv navnet paa brugeren du oensker, at oprette.");
+        String cpr = JOptionPane.showInputDialog("indtast cpr nummer på brugeren.");
+        String password = generatePassword();
+        try {
+			dao.createOperatoer(oprNavn, cpr, password);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
+	
 	public String generatePassword(){
 
 		final Random RANDOM = new SecureRandom();
@@ -109,9 +118,35 @@ public class CreateOperatoer implements ICreateOperatoer {
 
 
 	@Override
-	public void tellNetto() {
-		// TODO Auto-generated method stub
+	public int tellNetto(int tara, int brutto) {
+		return brutto-tara;
+	}
 
+
+	@Override
+	public void createSysAdmin() { //TODO: Throw exception?
+        String oprNavn = "SysAdmin";
+        String cpr = null;
+        String password = "02324it!";
+        try {
+			dao.createOperatoer(oprNavn, cpr, password);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	@Override
+	public IOperatoerDTO getOperator(int oprID) {
+		try {
+			return dao.getOperatoer(oprID);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

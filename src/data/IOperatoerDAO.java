@@ -6,7 +6,7 @@ public interface IOperatoerDAO {
 
 	IOperatoerDTO getOperatoer(int oprId) throws DALException;
 	List<IOperatoerDTO> getOperatoerList() throws DALException;
-	void createOperatoer(IOperatoerDTO opr) throws DALException;
+	void createOperatoer(String oprNavn, String cpr, String password) throws DALException;
 	void updateOperatoer(IOperatoerDTO opr) throws DALException;
 	
 	

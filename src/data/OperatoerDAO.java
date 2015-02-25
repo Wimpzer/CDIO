@@ -8,7 +8,7 @@ public class OperatoerDAO implements IOperatoerDAO {
 	
 	@Override
 	public IOperatoerDTO getOperatoer(int oprId) throws DALException {
-		return operators.get(oprId);
+		return operators.get(oprId-10);
 	}
 
 	@Override
@@ -17,8 +17,9 @@ public class OperatoerDAO implements IOperatoerDAO {
 	}
 
 	@Override
-	public void createOperatoer(IOperatoerDTO opr) throws DALException {
-		operators.add(opr);		
+	public void createOperatoer(String oprNavn, String cpr, String password) throws DALException {
+		IOperatoerDTO opr = new OperatoerDTO(getOperatoerList().size()+10, oprNavn, cpr, password);
+		operators.add(opr);
 	}
 
 	@Override

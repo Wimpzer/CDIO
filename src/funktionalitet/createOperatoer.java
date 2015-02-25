@@ -7,10 +7,10 @@ import java.lang.*;
 import data.IOperatoerDAO;
 import data.IOperatoerDAO.DALException;
 
-public class createOperatoer implements ICreateOperatoer {
+public class CreateOperatoer implements ICreateOperatoer {
 	IOperatoerDAO dao;
 
-	public createOperatoer(IOperatoerDAO dao) {
+	public CreateOperatoer(IOperatoerDAO dao) {
 		this.dao = dao;
 	}
 

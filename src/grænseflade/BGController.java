@@ -1,20 +1,23 @@
 package grænseflade;
 
+import java.util.Scanner;
+
+import funktionalitet.ICreateOperatoer;
+
 public class BGController {
 
+	ICreateOperatoer co;
+	IBrugergrænseflade bgf;
 
-	Brugergrænseflade input;
-
-	public BGController(){
-		input = new Brugergrænseflade();
-	}
+	Scanner scan = new Scanner(System.in);
 
 	public void run(){
 
 		int in = 0;
 		do
 		{
-			in = input.InputMenu();
+			bgf.InputMenu();
+			in = scan.nextInt();
 			InputHandler(in);
 		}while (in!=0);
 	}
@@ -23,38 +26,28 @@ public class BGController {
 
 		switch(in){
 
-		case 0: exit();
-
-		case 1:  opAdmin();					
+		case 0:	bgf.exit();
+		break;
+		
+		case 1: bgf.systemAdmin();					
 		break;
 
-		case 2:  passControle();
+		case 2: bgf.passControle();
 		break;
 
-		case 3:  test();
+		case 3: bgf.test();
 		break;
 		}
 
 
 	}
 
-	private void test() {
-		System.out.println("test");
 
-	}
 
-	private void passControle() {
-		System.out.println("passControle");
+	public void setRefs(ICreateOperatoer co,IBrugergrænseflade bgf){
 
-	}
-
-	private void opAdmin() {
-		System.out.println("opAdmin");
-
-	}
-
-	private void exit() {
-		System.out.println("exit");
+		this.co = co;
+		this.bgf = bgf;
 
 	}
 

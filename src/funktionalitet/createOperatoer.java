@@ -19,7 +19,6 @@ public class CreateOperatoer implements ICreateOperatoer {
 
 	@Override
 	public boolean checkPassword(int oprID, String password) {
-		// TODO Auto-generated method stub
 
 		boolean valid = false;
 
@@ -39,17 +38,16 @@ public class CreateOperatoer implements ICreateOperatoer {
 
 	@Override
 	public void createOperatoer() { //TODO: Throw exception?
-        String oprNavn = JOptionPane.showInputDialog("Skriv navnet paa brugeren du oensker, at oprette.");
-        String cpr = JOptionPane.showInputDialog("indtast cpr nummer på brugeren.");
-        String password = generatePassword();
-        try {
+		String oprNavn = JOptionPane.showInputDialog("Skriv navnet paa brugeren du oensker, at oprette.");
+		String cpr = JOptionPane.showInputDialog("indtast cpr nummer på brugeren.");
+		String password = generatePassword();
+		try {
 			dao.createOperatoer(oprNavn, cpr, password);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String generatePassword(){
 
 		final Random RANDOM = new SecureRandom();
@@ -82,39 +80,37 @@ public class CreateOperatoer implements ICreateOperatoer {
 
 	@Override
 	public void setNewPassword(int oprID, String password) {
-		// TODO Auto-generated method stub
 
 		if(isValid(password)){
 			try {
 				dao.getOperatoer(oprID).setPassword(password);
 			} catch (DALException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+		}else System.out.println("Your new password contains invalid signs");
+
 	}
-		//Kontrollerer om password er gyldigt IKKE FÆRDIGT
-		public boolean isValid(String password){
-			
-			boolean isValid = false;
-			int count = 1;
-			String[] specielSigns = {".","-","_","+","!","?","="};
-			
-			if(password.length() <= 6){
-				isValid = false;
-			}else {
-				for(int i = 0; i < password.length(); i++){
-					if (Character.isLetterOrDigit(password.charAt(i)) & specielSigns.equals(password.charAt(i)) ){
-							isValid = true;
-						}else {
-							isValid = false;
-						}
-					}
+	public boolean isValid(String password){
+
+		boolean isValid = false;
+		int count = 1;
+		String[] specielSigns = {".","-","_","+","!","?","="};
+
+		if(password.length() <= 6){
+			isValid = false;
+		}else {
+			for(int i = 0; i < password.length(); i++){
+				if (Character.isLetterOrDigit(password.charAt(i)) || specielSigns.equals(password.charAt(i)) ){
+					isValid = true;
+				}else {
+					isValid = false;
+					i = password.length();
 				}
-			
-			return isValid;
+			}
 		}
+
+		return isValid;
+	}
 
 
 	@Override
@@ -125,16 +121,15 @@ public class CreateOperatoer implements ICreateOperatoer {
 
 	@Override
 	public void createSysAdmin() { //TODO: Throw exception?
-        String oprNavn = "SysAdmin";
-        String cpr = null;
-        String password = "02324it!";
-        try {
+		String oprNavn = "SysAdmin";
+		String cpr = null;
+		String password = "02324it!";
+		try {
 			dao.createOperatoer(oprNavn, cpr, password);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 
@@ -143,7 +138,6 @@ public class CreateOperatoer implements ICreateOperatoer {
 		try {
 			return dao.getOperatoer(oprID);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

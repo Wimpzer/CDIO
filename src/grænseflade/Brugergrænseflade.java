@@ -1,5 +1,6 @@
 package grænseflade;
 
+import data.IOperatoerDAO.DALException;
 import funktionalitet.ICreateOperatoer;
 
 public class Brugergrænseflade implements IBrugergrænseflade {
@@ -9,7 +10,7 @@ public class Brugergrænseflade implements IBrugergrænseflade {
 		this.co = co;
 	}
 
-	public void visOutput(String string){
+	public void showOutput(String string){
 		System.out.println(string);
 	}
 
@@ -31,16 +32,6 @@ public class Brugergrænseflade implements IBrugergrænseflade {
 		System.out.println("Press 0 to: Exit");
 	}
 
-	public void test() {
-		System.out.println("Test");
-
-	}
-
-	public void passControle() {
-		System.out.println("PassControle");
-
-	}
-
 	public void systemAdmin() {
 		System.out.println("SystemAdmin");
 
@@ -57,4 +48,13 @@ public class Brugergrænseflade implements IBrugergrænseflade {
 	public void wrongPassword(){
 		System.out.println("Your password is wrong!!!!!  :( ");
 	}
+	
+	public void getPasswordLastUser(){
+		try {
+			System.out.println("Auto-generated password: " + co.getOperator(co.getOperatorList().size()+9).getPassword());
+		} catch (DALException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 }

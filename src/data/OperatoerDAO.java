@@ -26,5 +26,9 @@ public class OperatoerDAO implements IOperatoerDAO {
 	public void updateOperatoer(IOperatoerDTO opr) throws DALException {
 		operators.set(opr.getOprId(), opr);		
 	}
+	
+	public void removeOperatoer(int oprID) throws DALException{
+		operators.remove(oprID-10);
+	}
 
 }

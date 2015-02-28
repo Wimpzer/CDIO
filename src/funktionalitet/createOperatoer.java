@@ -1,9 +1,9 @@
 package funktionalitet;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-
-import javax.swing.JOptionPane;
 
 import data.IOperatoerDAO;
 import data.IOperatoerDAO.DALException;
@@ -37,15 +37,9 @@ public class CreateOperatoer implements ICreateOperatoer {
 	}
 
 	@Override
-	public void createOperatoer() { //TODO: Throw exception?
-		String oprNavn = JOptionPane.showInputDialog("Skriv navnet paa brugeren du oensker, at oprette.");
-		String cpr = JOptionPane.showInputDialog("indtast cpr nummer på brugeren.");
+	public void createOperatoer(String oprNavn, String cpr) throws DALException {
 		String password = generatePassword();
-		try {
 			dao.createOperatoer(oprNavn, cpr, password);
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public String generatePassword(){
@@ -67,17 +61,39 @@ public class CreateOperatoer implements ICreateOperatoer {
 	}
 
 	@Override
-	public void deleteOperatoer(int oprID) {
-		// TODO Auto-generated method stub
-
+	public void deleteOperatoer(int oprID) throws DALException {
+		dao.removeOperatoer(oprID);
 	}
 
 	@Override
-	public void editOperatoer(int oprID) {
-		// TODO Auto-generated method stub
-
+	public void editOperatorName(int oprID, String oprName) throws DALException {
+		IOperatoerDTO opr = getOperator(oprID);
+		opr.setOprNavn(oprName);
+		dao.updateOperatoer(opr);
+		
 	}
 
+
+	@Override
+	public void editOperatorCPR(int oprID, String CPR) throws DALException {
+		IOperatoerDTO opr = getOperator(oprID);
+		opr.setOprNavn(CPR);
+		dao.updateOperatoer(opr);
+	}
+
+
+	@Override
+	public void editOperatorPassword(int oprID, String password) throws DALException {
+		IOperatoerDTO opr = getOperator(oprID);
+		if(isValid(password)){
+		opr.setOprNavn(password);
+		dao.updateOperatoer(opr);
+		}else{
+			System.out.println("Password does not match password criteria"); //TODO: Fjern denne syso!
+			//TODO: Få den tilbage i menuen
+		}
+	}
+	
 	@Override
 	public void setNewPassword(int oprID, String password) {
 
@@ -87,7 +103,7 @@ public class CreateOperatoer implements ICreateOperatoer {
 			} catch (DALException e) {
 				e.printStackTrace();
 			}
-		}else System.out.println("Your new password contains invalid signs");
+		}else System.out.println("Your new password contains invalid signs"); //TODO: Fjern denne syso!
 
 	}
 	public boolean isValid(String password){
@@ -120,16 +136,11 @@ public class CreateOperatoer implements ICreateOperatoer {
 
 
 	@Override
-	public void createSysAdmin() { //TODO: Throw exception?
+	public void createSysAdmin() throws DALException {
 		String oprNavn = "SysAdmin";
 		String cpr = null;
 		String password = "02324it!";
-		try {
-			dao.createOperatoer(oprNavn, cpr, password);
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
-
+		dao.createOperatoer(oprNavn, cpr, password);
 	}
 
 
@@ -142,6 +153,21 @@ public class CreateOperatoer implements ICreateOperatoer {
 		}
 		return null;
 	}
+
+
+	@Override
+	public List<String> getOperatorList() throws DALException {
+		List<IOperatoerDTO> list = dao.getOperatoerList();
+		List<String> stringList = new ArrayList<String>();
+		for (int i = 0; i < list.size(); i++) {
+			String string = list.get(i).getOprId() + list.get(i).getOprNavn();
+			stringList.add(string);
+		}
+		return stringList;
+	}
+
+
+
 
 
 }

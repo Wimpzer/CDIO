@@ -1,7 +1,10 @@
 package grænseflade;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import data.IOperatoerDAO.DALException;
 import funktionalitet.ICreateOperatoer;
 
 public class BGController {
@@ -19,7 +22,11 @@ public class BGController {
 	}
 
 	public void run(){
-		co.createSysAdmin();
+		try {
+			co.createSysAdmin();
+		} catch (DALException e) {
+		bgf.showOutput(e.getMessage());
+		}
 
 		int in = 0;
 		do
@@ -35,26 +42,27 @@ public class BGController {
 
 		switch(in){
 
-		case 0:	bgf.visOutput("Exit");
+		case 0:	bgf.showOutput("You've closed the program");
 		break;
 
 		case 1: mainMenu1();				
 		break;
 
-		case 2: bgf.passControle();
+		case 2: mainMenu2();
 		break;
 
 		case 3: mainMenu3();	
 		break;
 
-		default: bgf.visOutput("Wrong input");
+		default: bgf.showOutput("Wrong input");
+		mainMenu();
 		break;
 		}
 
 	}
 
 	private void mainMenu1() {
-		bgf.visOutput("Type your ID");
+		bgf.showOutput("Type your ID");
 		int oprID = scan.nextInt(); 
 		bgf.typePassword();
 		String pass = scan.next();
@@ -65,23 +73,47 @@ public class BGController {
 			bgf.wrongPassword();
 			mainMenu();
 		}else if(oprID != 10){ 
-			bgf.visOutput("Operator ID is not allowed in !!! >:D");
+			bgf.showOutput("Operator ID is not allowed in !!! >:D");
 			mainMenu();
 		}
 	}
 
-	private void mainMenu3() {
-		bgf.visOutput("Type your ID");
+	private void mainMenu2() {
+		bgf.showOutput("Type your ID");
 		int oprID = scan.nextInt(); 
 		bgf.typePassword();
 		String pass = scan.next();
 		boolean valid = co.checkPassword(oprID, pass);
 		if(valid == true){
-			bgf.visOutput("Tara weight in kilo");
+			bgf.showOutput("Type new password");
+			String newPassword = scan.next();
+			bgf.showOutput("Type new password again");
+			String newPassword2 = scan.next();
+			if(newPassword.equals(newPassword2)){
+			try {
+				co.editOperatorPassword(oprID, newPassword);
+			} catch (DALException e) {
+				bgf.showOutput(e.getMessage());
+			}
+			}else{
+				bgf.showOutput("Passwords did not match - Try again");
+				mainMenu2();
+			}
+		}
+	}
+	
+	private void mainMenu3() {
+		bgf.showOutput("Type your ID");
+		int oprID = scan.nextInt(); 
+		bgf.typePassword();
+		String pass = scan.next();
+		boolean valid = co.checkPassword(oprID, pass);
+		if(valid == true){
+			bgf.showOutput("Tara weight in kilo");
 			int tara = scan.nextInt();
-			bgf.visOutput("Brutto weight in kilo");
+			bgf.showOutput("Brutto weight in kilo");
 			int brutto = scan.nextInt();
-			bgf.visOutput("Netto weight in kilo: " + co.tellNetto(tara, brutto));		
+			bgf.showOutput("Netto weight in kilo: " + co.tellNetto(tara, brutto));		
 		}else{
 			bgf.wrongPassword();
 			mainMenu();
@@ -97,27 +129,127 @@ public class BGController {
 		case 0:	mainMenu();
 		break;
 
-		case 1: co.createOperatoer();
+		case 1: createOperatoer();
 		systemAdmin();
 		break;
 
-		case 2: bgf.passControle();
+		case 2: EditOperatoer();;
 		break;
 
-		case 3: bgf.visOutput("Delete");			
+		case 3: deleteOperatoer();			
 		break;
 
-		default: bgf.visOutput("Wrong input");
+		default: bgf.showOutput("Wrong input");
+		systemAdmin();
 		break;
-		}
-
+		}		
 	}
 
+	private void createOperatoer(){
+		bgf.showOutput("Type name of new operatoer");
+		String oprNavn = scan.next();
+		bgf.showOutput("Type the CPR number");
+		String cpr = scan.next();
+		try {
+			co.createOperatoer(oprNavn, cpr);
+		} catch (DALException e) {
+			bgf.showOutput(e.getMessage());
+		}
+		bgf.getPasswordLastUser();
+	}
 
+	private void deleteOperatoer(){
+		bgf.showOutput("Choose which operatoer to delete");
+		int oprID = scan.nextInt();
+		try {
+			co.deleteOperatoer(oprID);
+		} catch (DALException e) {
+			bgf.showOutput(e.getMessage());
+		}
+	}
+	
+	private void EditOperatoer(){
+		getOperatorList();
+		bgf.showOutput("Choose which user to edit");
+		int oprID = scan.nextInt();
+		bgf.showOutput(co.getOperator(oprID).getOprNavn() + " have been  chosen");
+		editUserMenu(oprID);		
+	}
 
+	private void getOperatorList() {
+		List<String> stringList = new ArrayList<String>();
+		try {
+			stringList = co.getOperatorList();
+		} catch (DALException e) {
+			bgf.showOutput(e.getMessage());
+		}
+		for (int i = 0; i < stringList.size(); i++) {
+			bgf.showOutput(stringList.get(i));
+		}
+	}
+	
+	private void editUserMenu(int oprID){
+		bgf.showOutput("Choose what to edit");
+		bgf.showOutput("1. Name");
+		bgf.showOutput("2. CPR number");
+		bgf.showOutput("3. Password");
+		bgf.showOutput("0. Exit");
+		userMenuSwitchCase(oprID);
+	}
+	
+	private void userMenuSwitchCase(int oprID){
+		int input = scan.nextInt();
+		
+		switch (input) {
+		case 1:
+			changeName(oprID);
+			break;
 
-
-
-
-
+		case 2:
+			changeCPR(oprID);
+			break;
+			
+		case 3:
+			changePassword(oprID);
+			break;
+			
+		case 0:
+			systemAdmin();
+			break;
+			
+		default:
+		bgf.showOutput("Wrong input");
+			break;
+		}
+	}
+	
+	private void changeName(int oprID){
+		bgf.showOutput("New name: ");
+		String oprName = scan.next();
+		try {
+			co.editOperatorName(oprID, oprName);
+		} catch (DALException e) {
+			bgf.showOutput(e.getMessage());
+		}
+	}
+	
+	private void changeCPR(int oprID){
+		bgf.showOutput("New CPR: ");
+		String CPR = scan.next();
+		try {
+			co.editOperatorCPR(oprID, CPR);
+		} catch (DALException e) {
+			bgf.showOutput(e.getMessage());
+		}
+	}
+	
+	private void changePassword(int oprID) {
+		bgf.showOutput("New password: ");
+		String password = scan.next();
+		try {
+			co.editOperatorPassword(oprID, password);
+		} catch (DALException e) {
+			bgf.showOutput(e.getMessage());
+		}
+	}
 }

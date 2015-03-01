@@ -86,7 +86,7 @@ public class CreateOperatoer implements ICreateOperatoer {
 	public void editOperatorPassword(int oprID, String password) throws DALException {
 		IOperatoerDTO opr = getOperator(oprID);
 		if(isValid(password)){
-		opr.setOprNavn(password);
+		opr.setPassword(password);
 		dao.updateOperatoer(opr);
 		}else{
 			System.out.println("Password does not match password criteria"); //TODO: Fjern denne syso!

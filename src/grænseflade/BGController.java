@@ -25,7 +25,7 @@ public class BGController {
 		try {
 			co.createSysAdmin();
 		} catch (DALException e) {
-		bgf.showOutput(e.getMessage());
+			bgf.showOutput(e.getMessage());
 		}
 
 		int in = 0;
@@ -66,16 +66,22 @@ public class BGController {
 		int oprID = scan.nextInt(); 
 		bgf.typePassword();
 		String pass = scan.next();
-		boolean valid = co.checkPassword(oprID, pass);
-		if(valid == true && oprID == 10){
-			systemAdmin();
-		}else if(valid == false && oprID == 10){
-			bgf.wrongPassword();
-			mainMenu();
-		}else if(oprID != 10){ 
-			bgf.showOutput("Operator ID is not allowed in !!! >:D");
+		try {
+			boolean valid = co.checkPassword(oprID, pass);
+			if(valid == true && oprID == 10){
+				systemAdmin();
+			}else if(valid == false && oprID == 10){
+				bgf.wrongPassword();
+				mainMenu();
+			}else if(oprID != 10){ 
+				bgf.showOutput("Operator ID is not allowed in !!! >:D");
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			bgf.showOutput("ID is not found in database");
+		} finally{
 			mainMenu();
 		}
+
 	}
 
 	private void mainMenu2() {
@@ -90,18 +96,22 @@ public class BGController {
 			bgf.showOutput("Type new password again");
 			String newPassword2 = scan.next();
 			if(newPassword.equals(newPassword2)){
-			try {
-				co.editOperatorPassword(oprID, newPassword);
-			} catch (DALException e) {
-				bgf.showOutput(e.getMessage());
-			}
+				try {
+					co.editOperatorPassword(oprID, newPassword);
+				} catch (DALException e) {
+					bgf.showOutput(e.getMessage());
+				}
+				mainMenu();
 			}else{
 				bgf.showOutput("Passwords did not match - Try again");
-				mainMenu2();
+				mainMenu();
 			}
+		}else if(valid == false){
+			bgf.showOutput("Password does not match ID");
+			mainMenu();
 		}
 	}
-	
+
 	private void mainMenu3() {
 		bgf.showOutput("Type your ID");
 		int oprID = scan.nextInt(); 
@@ -113,7 +123,8 @@ public class BGController {
 			int tara = scan.nextInt();
 			bgf.showOutput("Brutto weight in kilo");
 			int brutto = scan.nextInt();
-			bgf.showOutput("Netto weight in kilo: " + co.tellNetto(tara, brutto));		
+			bgf.showOutput("Netto weight in kilo: " + co.tellNetto(tara, brutto));
+			mainMenu();
 		}else{
 			bgf.wrongPassword();
 			mainMenu();
@@ -167,7 +178,7 @@ public class BGController {
 			bgf.showOutput(e.getMessage());
 		}
 	}
-	
+
 	private void EditOperatoer(){
 		getOperatorList();
 		bgf.showOutput("Choose which user to edit");
@@ -187,7 +198,7 @@ public class BGController {
 			bgf.showOutput(stringList.get(i));
 		}
 	}
-	
+
 	private void editUserMenu(int oprID){
 		bgf.showOutput("Choose what to edit");
 		bgf.showOutput("1. Name");
@@ -196,33 +207,36 @@ public class BGController {
 		bgf.showOutput("0. Exit");
 		userMenuSwitchCase(oprID);
 	}
-	
+
 	private void userMenuSwitchCase(int oprID){
 		int input = scan.nextInt();
-		
+
 		switch (input) {
 		case 1:
 			changeName(oprID);
+			systemAdmin();
 			break;
 
 		case 2:
 			changeCPR(oprID);
+			systemAdmin();
 			break;
-			
+
 		case 3:
 			changePassword(oprID);
+			systemAdmin();
 			break;
-			
+
 		case 0:
 			systemAdmin();
 			break;
-			
+
 		default:
-		bgf.showOutput("Wrong input");
+			bgf.showOutput("Wrong input");
 			break;
 		}
 	}
-	
+
 	private void changeName(int oprID){
 		bgf.showOutput("New name: ");
 		String oprName = scan.next();
@@ -232,7 +246,7 @@ public class BGController {
 			bgf.showOutput(e.getMessage());
 		}
 	}
-	
+
 	private void changeCPR(int oprID){
 		bgf.showOutput("New CPR: ");
 		String CPR = scan.next();
@@ -242,7 +256,7 @@ public class BGController {
 			bgf.showOutput(e.getMessage());
 		}
 	}
-	
+
 	private void changePassword(int oprID) {
 		bgf.showOutput("New password: ");
 		String password = scan.next();

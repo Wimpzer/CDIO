@@ -260,10 +260,14 @@ public class BGController {
 	private void changePassword(int oprID) {
 		bgf.showOutput("New password: ");
 		String password = scan.next();
-		try {
-			co.editOperatorPassword(oprID, password);
-		} catch (DALException e) {
-			bgf.showOutput(e.getMessage());
+		if(co.isValid(password)){
+			try {
+				co.editOperatorPassword(oprID, password);
+			} catch (DALException e) {
+				bgf.showOutput(e.getMessage());
+			}
+		}else{
+			bgf.showOutput("Password does not match password criteria");
 		}
 	}
 }

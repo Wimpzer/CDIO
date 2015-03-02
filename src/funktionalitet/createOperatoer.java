@@ -84,32 +84,13 @@ public class CreateOperatoer implements ICreateOperatoer {
 
 	@Override
 	public void editOperatorPassword(int oprID, String password) throws DALException {
-		IOperatoerDTO opr = getOperator(oprID);
-		if(isValid(password)){
-		opr.setPassword(password);
-		dao.updateOperatoer(opr);
-		}else{
-			System.out.println("Password does not match password criteria"); //TODO: Fjern denne syso!
-			//TODO: Få den tilbage i menuen
-		}
+		dao.getOperatoer(oprID).setPassword(password);
 	}
 	
 	@Override
-	public void setNewPassword(int oprID, String password) {
-
-		if(isValid(password)){
-			try {
-				dao.getOperatoer(oprID).setPassword(password);
-			} catch (DALException e) {
-				e.printStackTrace();
-			}
-		}else System.out.println("Your new password contains invalid signs"); //TODO: Fjern denne syso!
-
-	}
 	public boolean isValid(String password){
 
 		boolean isValid = false;
-		int count = 1;
 		String[] specielSigns = {".","-","_","+","!","?","="};
 
 		if(password.length() <= 6){

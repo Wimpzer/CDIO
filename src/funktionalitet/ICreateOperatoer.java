@@ -16,7 +16,7 @@ public interface ICreateOperatoer {
 	void editOperatorPassword(int oprID, String password) throws DALException;
 	IOperatoerDTO getOperator(int oprID);
 	List<String> getOperatorList() throws DALException;
-	void setNewPassword(int oprID, String password);
+	boolean isValid(String password);
 	int tellNetto(int tara, int brutto);
 	void createSysAdmin() throws DALException;
 	

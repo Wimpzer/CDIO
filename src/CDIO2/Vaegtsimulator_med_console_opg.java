@@ -1,4 +1,9 @@
 package CDIO2;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Scanner;
 
 
@@ -52,7 +57,7 @@ public class Vaegtsimulator_med_console_opg {
     		System.out.println("Indtast portnr: ");
     		int j = scan.nextInt();
     		portdst = j;}	
-    		
+  
             System.out.println("Venter paa connection paa port " + portdst );
             System.out.println("Indtast eventuel portnummer som 1. argument");
             System.out.println("paa kommando linien for andet portnr");

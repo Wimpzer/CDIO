@@ -1,12 +1,12 @@
-package grænseflade;
+package grÃ¦nseflade;
 
 import data.IOperatoerDAO.DALException;
 import funktionalitet.ICreateOperatoer;
 
-public class Brugergrænseflade implements IBrugergrænseflade {
+public class BrugergrÃ¦nseflade implements IBrugergrÃ¦nseflade {
 	ICreateOperatoer co;
 
-	public Brugergrænseflade(ICreateOperatoer co) {
+	public BrugergrÃ¦nseflade(ICreateOperatoer co) {
 		this.co = co;
 	}
 

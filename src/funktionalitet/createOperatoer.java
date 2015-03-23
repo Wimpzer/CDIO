@@ -42,6 +42,7 @@ public class CreateOperatoer implements ICreateOperatoer {
 			dao.createOperatoer(oprNavn, cpr, password);
 	}
 
+	@Override
 	public String generatePassword(){
 
 		final Random RANDOM = new SecureRandom();
@@ -146,9 +147,4 @@ public class CreateOperatoer implements ICreateOperatoer {
 		}
 		return stringList;
 	}
-
-
-
-
-
 }

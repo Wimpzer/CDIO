@@ -1,6 +1,6 @@
-package grænseflade;
+package grÃ¦nseflade;
 
-public interface IBrugergrænseflade {
+public interface IBrugergrÃ¦nseflade {
 
 	public void showOutput(String string);
 	

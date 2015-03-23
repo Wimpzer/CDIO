@@ -2,16 +2,16 @@ package main;
 
 import data.*;
 import funktionalitet.*;
-import grænseflade.BGController;
-import grænseflade.Brugergrænseflade;
-import grænseflade.IBrugergrænseflade;
+import grÃ¦nseflade.BGController;
+import grÃ¦nseflade.BrugergrÃ¦nseflade;
+import grÃ¦nseflade.IBrugergrÃ¦nseflade;
 
 public class Main {
 
 	public static void main(String[] args) {
 		IOperatoerDAO dao = new OperatoerDAO();
 		ICreateOperatoer co = new CreateOperatoer(dao);
-		IBrugergrænseflade bgf = new Brugergrænseflade(co);
+		IBrugergrÃ¦nseflade bgf = new BrugergrÃ¦nseflade(co);
 		BGController bgc = new BGController();
 		bgc.setRefs(co, bgf);
 		bgc.run();

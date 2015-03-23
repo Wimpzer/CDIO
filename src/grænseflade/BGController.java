@@ -1,4 +1,4 @@
-package grænseflade;
+package grÃ¦nseflade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,11 @@ import funktionalitet.ICreateOperatoer;
 public class BGController {
 
 	ICreateOperatoer co;
-	IBrugergrænseflade bgf;
+	IBrugergrÃ¦nseflade bgf;
 
 	Scanner scan = new Scanner(System.in);
 
-	public void setRefs(ICreateOperatoer co,IBrugergrænseflade bgf){
+	public void setRefs(ICreateOperatoer co,IBrugergrÃ¦nseflade bgf){
 
 		this.co = co;
 		this.bgf = bgf;
